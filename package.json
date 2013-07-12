@@ -1,0 +1,9 @@
+﻿{
+    "name": "xpathsearch",
+    "description": "site that uses Saxon CE to create simple xpath search interface",
+    "private": true,
+    "version": "0.0.1",
+    "dependencies": {
+        "connect": "2.8.2"
+    }
+}
