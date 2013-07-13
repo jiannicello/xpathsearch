@@ -21,6 +21,107 @@ version="2.0"
     <xsl:variable name="nodesCount" select="count($nodes)" />
     
     <div class="results-count">Count: <xsl:value-of select="$nodesCount" /></div>
+    
+    <xsl:if test="$nodesCount > 0">      
+        <xsl:call-template name="chooseDsp">
+            <xsl:with-param name="nodes" select="$nodes" />
+        </xsl:call-template>
+    </xsl:if>
 </xsl:template>
+
+<xsl:template name="chooseDsp">
+    <xsl:param name="nodes" />
+    
+    <xsl:variable name="item1" select="$nodes[1]" />
+
+    <xsl:choose>
+        <xsl:when test="$item1 instance of xs:anyAtomicType">
+            <xsl:call-template name="dspSimple">
+                <xsl:with-param name="nodes" select="$nodes" />
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:call-template name="chooseDsp2">
+                <xsl:with-param name="nodes" select="$nodes" />
+                <xsl:with-param name="item1" select="$item1" />
+            </xsl:call-template>
+        </xsl:otherwise>
+    </xsl:choose>
+
+</xsl:template>
+
+<xsl:template name="chooseDsp2">
+    <xsl:param name="nodes" />
+    <xsl:param name="item1" />
+    
+    <xsl:choose>
+        <xsl:when test="count($item1/child::*) > 0">
+            <xsl:call-template name="dspElements">
+                <xsl:with-param name="nodes" select="$nodes" />
+                <xsl:with-param name="item1" select="$item1" />
+            </xsl:call-template>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:call-template name="dspSimple">
+                <xsl:with-param name="nodes" select="$nodes" />
+            </xsl:call-template>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<xsl:template name="dspSimple">
+    <xsl:param name="nodes" />
+    
+    <table class="table table-striped table-condensed table-bordered">
+        <tbody>
+            <xsl:for-each select="$nodes">
+                <xsl:sort select="." />
+                
+                <tr>
+                    <xsl:if test="position() mod 2 = 0">
+                        <xsl:attribute name="class">alt-row</xsl:attribute>
+                    </xsl:if>
+                    <td><xsl:value-of select="position()" /></td>
+                    <td><xsl:value-of select="." /></td>
+                </tr>
+            </xsl:for-each>
+        </tbody>
+    </table>
+</xsl:template>
+
+<xsl:template name="dspElements">
+    <xsl:param name="nodes" />
+    <xsl:param name="item1" />
+    
+    <xsl:variable name="columns" select="$item1/child::*" />
+    
+    <table class="table table-striped table-condensed table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <xsl:for-each select="$columns">
+                    <th><xsl:value-of select="local-name()" /></th>
+                </xsl:for-each>
+            </tr>
+        </thead>
+        <tbody>
+            <!--<<sort>>-->
+            <tr>
+                <td><xsl:value-of select="position()" /></td>
+                <xsl:call-template name="dspElementColumns" />
+            </tr>
+        </tbody>
+    </table>
+</xsl:template>
+
+<xsl:template name="dspElementColumns">
+    <xsl:variable name="columns" select="child::*" />
+    
+    <xsl:for-each select="$columns">
+        <td><xsl:value-of select="." /></td>
+    </xsl:for-each>
+</xsl:template>
+
+
 
 </xsl:transform>
