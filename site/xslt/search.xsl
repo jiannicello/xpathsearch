@@ -105,11 +105,13 @@ version="2.0"
             </tr>
         </thead>
         <tbody>
-            <!--<<sort>>-->
-            <tr>
-                <td><xsl:value-of select="position()" /></td>
-                <xsl:call-template name="dspElementColumns" />
-            </tr>
+            <xsl:for-each select="$nodes">
+                <!--<<sort>>-->
+                <tr>
+                    <td><xsl:value-of select="position()" /></td>
+                    <xsl:call-template name="dspElementColumns" />
+                </tr>
+            </xsl:for-each>
         </tbody>
     </table>
 </xsl:template>
