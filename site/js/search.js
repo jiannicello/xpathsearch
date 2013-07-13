@@ -83,13 +83,12 @@
             btnSearch.prop('disabled', false);
         },
         render: function () {
-            console.group('Search render');
+            console.log('Search render');
 
             this.bindUI();
             this.setSaxonErrorHandler();
 
             this.ajaxGetDdl();
-            console.groupEnd();
         },
         setSaxonErrorHandler: function () {
             console.log('Search setSaxonErrorHandler');
