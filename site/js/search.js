@@ -95,10 +95,14 @@
         onBtnSearchClick: function (e) {
             console.log('Search onBtnSearchClick');
             var ui = this.ui,
+                ddlSelectedValue = ui.ddl.find('option:selected').prop('value'),
                 getSheetURL = function () {
                     var sb = ['xslt/search.xsl?xpath=', encodeURI(ui.txtSearch.val())],
                         sort = $.trim(ui.txtSort.val());
-
+                    
+                    sb.push('&source=');
+                    sb.push(ddlSelectedValue);
+                        
                     if (sort) {
                         sb.push('&sort=');
                         sb.push(encodeURI(sort));
@@ -118,7 +122,7 @@
             ui.results.empty();
 
             xsl = Saxon.requestXML(getSheetURL());
-            xml = Saxon.requestXML(ui.ddl.find('option:selected').prop('value'));
+            xml = Saxon.requestXML(ddlSelectedValue);
             proc = Saxon.newXSLT20Processor(xsl);
 
             proc.setSuccess(function () {

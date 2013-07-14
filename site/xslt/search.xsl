@@ -8,6 +8,7 @@ xmlns:xs="http://www.w3.org/2001/XMLSchema"
 exclude-result-prefixes="xs prop"
 extension-element-prefixes="ixsl"
 version="2.0"
+<!--<<namespaces>>-->
 >
 
 <xsl:template name="main" match="/">
