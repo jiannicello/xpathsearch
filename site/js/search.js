@@ -95,7 +95,7 @@
         onBtnSearchClick: function (e) {
             console.log('Search onBtnSearchClick');
             var ui = this.ui,
-                ddlSelectedValue = ui.ddl.find('option:selected').prop('value'),
+                ddlSelectedValue = encodeURI(ui.ddl.find('option:selected').prop('value')),
                 getSheetURL = function () {
                     var sb = ['xslt/search.xsl?xpath=', encodeURI(ui.txtSearch.val())],
                         sort = $.trim(ui.txtSort.val());
