@@ -1,3 +1,4 @@
 node_modules/*
 site/data/*
 site/js/SaxonceDebug/*
+*DS_Store
