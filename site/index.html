@@ -1,15 +1,17 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>XPath Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="css/search.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/search.css" />
+    
 </head>
 <body>
+
     <div class="hero-unit">
-        <h1>XPath Search</h1>
+    <h1>XPath Search</h1>
     </div>
     
     <form class="form-horizontal">
@@ -22,13 +24,19 @@
         <div class="control-group">
             <label class="control-label" for="txtSearch">XPath</label>
             <div class="controls">
-                <input type="text" id="txtSearch" />
+                <input type="text" id="txtSearch" class="input-xxlarge" />
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="txtSort">Sort</label>
             <div class="controls">
-                <textarea id="txtSort" placeholder="&lt;xsl:sort select=&quot;&lt;&lt;path&gt;&gt;&quot;/&gt;"></textarea>
+                <textarea id="txtSort" class="input-xxlarge" placeholder="&lt;xsl:sort select=&quot;&lt;&lt;path&gt;&gt;&quot; /&gt;"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="txtNamespace">Namespace</label>
+            <div class="controls">
+                <textarea id="txtNamespace" class="input-xxlarge" placeholder="xmlns:myprefix=&quot;http://www.myurl&quot;"></textarea>
             </div>
         </div>
         <div class="control-group">
@@ -38,16 +46,22 @@
             </div>
         </div>
     </form>
+        
     
     <div id="divResults"></div>
-    
-    <form id="formDownload" method="post" action="/download">
-        <input type="hidden" id="data" name="data">
-    </form>
-    
+         
+
+
+<form id="formDownload" method="post" action="/download">
+<input type="hidden" id="data" name="data" />
+</form>
+
     <script src="/js/SaxonceDebug/Saxonce.nocache.js"></script>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/json.js"></script>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="/js/search.js"></script>
+
+
 </body>
 </html>

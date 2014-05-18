@@ -1,7 +1,8 @@
-﻿.hero-unit {padding:10px;}
-.hero-unit h1 {font-size:30px;}
+﻿.hero-unit { padding:10px;}
+.hero-unit h1 { font-size: 30px;}
+div#divResults {
+    padding-top: 10px;
+}
 
-div#divResults { padding-top: 10px;}
-
+#ddlSource { width:600px; }
 #txtSearch { width:1000px;}
-#txtSort {width:400px; height:50px;}

@@ -9,8 +9,9 @@ var connect = require('connect'),
 server.use(connect.logger('dev'));
 
 server.use(connect.query());
-server.use(query_sources());
 server.use(query_xpath());
+server.use(query_sources());
+
 
 server.use(connect.bodyParser());
 server.use(post_download());

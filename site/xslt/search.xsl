@@ -1,14 +1,14 @@
 ﻿<xsl:transform
-xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-xmlns:ixsl="http://saxonica.com/ns/interactiveXSLT"
-xmlns:js="http://saxonica.com/ns/globalJS"
-xmlns:prop="http://saxonica.com/ns/html-property"
-xmlns:style="http://saxonica.com/ns/html-style-property"
-xmlns:xs="http://www.w3.org/2001/XMLSchema"
-exclude-result-prefixes="xs prop"
-extension-element-prefixes="ixsl"
-version="2.0"
-<<namespaces>>
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:ixsl="http://saxonica.com/ns/interactiveXSLT"
+    xmlns:js="http://saxonica.com/ns/globalJS"
+    xmlns:prop="http://saxonica.com/ns/html-property"
+    xmlns:style="http://saxonica.com/ns/html-style-property"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    exclude-result-prefixes="xs prop"
+    extension-element-prefixes="ixsl"
+    version="2.0"
+    <<namespace>>
 >
 
 <xsl:template name="main" match="/">
@@ -23,7 +23,7 @@ version="2.0"
     
     <div class="results-count">Count: <xsl:value-of select="$nodesCount" /></div>
     
-    <xsl:if test="$nodesCount > 0">      
+    <xsl:if test="$nodesCount > 0">
         <xsl:call-template name="chooseDsp">
             <xsl:with-param name="nodes" select="$nodes" />
         </xsl:call-template>
@@ -34,7 +34,7 @@ version="2.0"
     <xsl:param name="nodes" />
     
     <xsl:variable name="item1" select="$nodes[1]" />
-
+    
     <xsl:choose>
         <xsl:when test="$item1 instance of xs:anyAtomicType">
             <xsl:call-template name="dspSimple">
@@ -48,7 +48,6 @@ version="2.0"
             </xsl:call-template>
         </xsl:otherwise>
     </xsl:choose>
-
 </xsl:template>
 
 <xsl:template name="chooseDsp2">
@@ -75,17 +74,16 @@ version="2.0"
     
     <table class="table table-striped table-condensed table-bordered">
         <tbody>
-            <xsl:for-each select="$nodes">
-                <xsl:sort select="." />
-                
-                <tr>
-                    <xsl:if test="position() mod 2 = 0">
-                        <xsl:attribute name="class">alt-row</xsl:attribute>
-                    </xsl:if>
-                    <td><xsl:value-of select="position()" /></td>
-                    <td><xsl:value-of select="." /></td>
-                </tr>
-            </xsl:for-each>
+        <xsl:for-each select="$nodes">
+            <xsl:sort select="."/>
+            <tr>
+                <xsl:if test="position() mod 2 = 0">
+                    <xsl:attribute name="class">alt-row</xsl:attribute>
+                </xsl:if>
+                <td class="count-column"><xsl:value-of select="position()" /></td>
+                <td><xsl:value-of select="." /></td>
+            </tr>
+        </xsl:for-each>
         </tbody>
     </table>
 </xsl:template>
@@ -109,7 +107,10 @@ version="2.0"
             <xsl:for-each select="$nodes">
                 <!--<<sort>>-->
                 <tr>
-                    <td><xsl:value-of select="position()" /></td>
+                    <xsl:if test="position() mod 2 = 0">
+                        <xsl:attribute name="class">alt-row</xsl:attribute>
+                    </xsl:if>
+                    <td class="count-column"><xsl:value-of select="position()" /></td>
                     <xsl:call-template name="dspElementColumns" />
                 </tr>
             </xsl:for-each>
@@ -125,6 +126,5 @@ version="2.0"
     </xsl:for-each>
 </xsl:template>
 
-
-
 </xsl:transform>
+
