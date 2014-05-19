@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Test Xslt</title>
+    
+</head>
+<body>
+
+
+    <div id="main"></div>
+    
+    <script src="/js/SaxonceDebug/Saxonce.nocache.js"></script>
+    <script src="/js/jquery-1.10.2.min.js"></script>
+    <script>
+        var search = null;
+        
+        (function () {
+            if(!window.console) {
+                window.console = {};
+                
+                if(!window.console.log) {
+                    window.console.log = function () {};
+                }
+            }
+            if(!window.console.group) {
+                window.console.group = function () {};
+                window.console.groupEnd = function () {};
+            }
+            
+            
+            var main = function () {
+                    console.log('main');
+                    var xsl = Saxon.requestXML('xslt/test.xsl'),
+                        xml = Saxon.requestXML('data/test.xml'),
+                        proc = Saxon.newXSLT20Processor(xsl);
+                
+                    proc.setSuccess(function () {
+                        console.log('proc on setSuccess');
+                    });
+                    
+                    
+                    proc.updateHTMLDocument(xml);
+                },
+                setErrorHandler = function () {
+                    console.log('setErrorHandler');
+                    Saxon.setErrorHandler(function (err) {
+                        alert(err.message);
+                    });
+                };
+            
+            onSaxonLoad = function () {
+                console.log('onSaxonLoad');
+                setErrorHandler();
+                main();
+            };
+        
+        }());
+        
+    </script>   
+
+</body>
+</html>
